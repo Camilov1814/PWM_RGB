@@ -18,10 +18,16 @@ int main()
     PwmOut ledR(LED1);
     PwmOut ledG(LED2);
     PwmOut ledB(LED3);
-    double numR, numG, numB;
+    float numR, numG, numB;
     string hexCode;
     cout << "Ingresa el codigo HEX: \n";
     cin >> hexCode;
+    if (hexCode.size() != 7 || hexCode[0] != '#') {
+        cout << "Valor hexadecimal no válido. Asegúrese de incluir el '#' al inicio y usar 6 dígitos." << endl;
+        return 1;
+    }
+    hexCode.erase(hexCode.begin());
+    
     uint32_t rgbValue = std::stoul(hexCode, nullptr, 16);
 
     // Set the LED to the specified RGB value
