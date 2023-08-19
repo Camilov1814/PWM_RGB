@@ -1,4 +1,21 @@
 ![](./resources/official_armmbed_example_badge.png)
+
+#*Programa realizado por Camilo Valencia y Juan Esteban Castaño*
+-Primero inicializamos los LEDS
+-Pedimos por consola ingresar el codigo HEX, debe contener aparte del #, 6 numeros. En caso
+de que no se cumpla entonces aparece en la consola un mensaje pidiendo que lo ingrese bien.
+(Esto se hace en un ciclo Do-While)
+-Con el metodo .erase() y el iterador hexCode.begin() (la posicion 0) borramos el "#" de nuestro String
+-creamos una variable de tipo uint32_t la cual significa unsigned int la cual almacena un binario.
+en este caso un binario entero de 24 bits 8 por cada codigo R, G , B.
+-Despues con >>16, >>8 se desplazan esas unidades, con el rojo se desplazan 16 para unicamente quedarse con los 8 ultimos
+los cuales contienen el codigo Rojo, con el verde se desplaza 8 y con el azul no se desplaza. (El rojo esta de ultimo, el verde en la mitad y el azul al principio)
+-Con el 0xFF estamos obligando a que se quede con los 8 bits mas significativos de cada desplazameinto que se hizo.
+-En esa misma linea se divide el valor extraido entre 255 para que el valor quede en un intervalo [0,1], seguidamente se le resta el resultado a 1 ya que por la forma de entrada a la tarjeta 0 es encendido y 1 es apagado.
+-con la funcion write se enciende cada led en ese especifico rango.
+
+
+
 # Blinky Mbed OS example
 
 The example project is part of the [Arm Mbed OS Official Examples](https://os.mbed.com/code/) and is the [getting started example for Mbed OS](https://os.mbed.com/docs/mbed-os/latest/quick-start/index.html). It contains an application that repeatedly blinks an LED on supported [Mbed boards](https://os.mbed.com/platforms/).
